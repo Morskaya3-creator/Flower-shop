@@ -1,14 +1,9 @@
-# Лендинг с исправленными ссылками и новыми изображениями цветов
-
-Я исправил ссылки для гейхер и колеусов в футере, убрал Instagram и добавил фотографии цветов по всему сайту:
-
-```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAMILY GARDEN - Многолетние цветы</title>
+    <title>РАЗНОЦВЕТЬЕ ЛИСТЬЕВ - Многолетние цветы и комнатные растения</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -329,6 +324,7 @@
         .tab-btn {
             padding: 12px 25px;
             background: var(--light);
+            border: none;
             border: none;
             border-radius: 30px;
             font-family: 'Montserrat', sans-serif;
@@ -863,6 +859,310 @@
             }
         }
         
+        /* Cart Styles */
+        .cart-icon {
+            position: relative;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--accent);
+            color: var(--text);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            z-index: 1001;
+            overflow-y: auto;
+        }
+
+        .cart-modal.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .cart-close {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .cart-items {
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .cart-item-remove {
+            color: #ff4757;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .cart-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            border-top: 1px solid #eee;
+            background: white;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .cart-checkout {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cart-checkout:hover {
+            background: var(--primary-dark);
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 50px 20px;
+            color: #666;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Checkout Modal */
+        .checkout-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .checkout-modal.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .checkout-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .checkout-form .form-group {
+            margin-bottom: 15px;
+        }
+
+        .checkout-total {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: var(--secondary);
+            border-radius: 5px;
+        }
+
+        .checkout-submit {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .checkout-submit:hover {
+            background: var(--primary-dark);
+        }
+
+        .checkout-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        /* Plant Card Styles */
+        .plant-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .plant-description {
+            margin-bottom: 15px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .plant-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .add-to-cart {
+            flex: 1;
+            padding: 8px 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .add-to-cart:hover {
+            background: var(--primary-dark);
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            padding: 2px;
+        }
+
         /* Flower decorations */
         .flower-decor {
             position: absolute;
@@ -960,6 +1260,58 @@
     </style>
 </head>
 <body>
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h3 class="cart-title">Корзина</h3>
+            <div class="cart-close" id="cartClose">&times;</div>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <i class="fas fa-shopping-cart" style="font-size: 3rem; color: #ccc; margin-bottom: 20px;"></i>
+                <p>Ваша корзина пуста</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Итого:</span>
+                <span id="cartTotal">0 ₽</span>
+            </div>
+            <button class="cart-checkout" id="checkoutBtn">Оформить заказ</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-close" id="checkoutClose">&times;</div>
+        <div class="checkout-header">
+            <h2 class="checkout-title">Оформление заказа</h2>
+        </div>
+        <form class="checkout-form" id="checkoutForm">
+            <div class="form-group">
+                <label for="checkoutName">ФИО</label>
+                <input type="text" id="checkoutName" required>
+            </div>
+            <div class="form-group">
+                <label for="checkoutPhone">Телефон</label>
+                <input type="tel" id="checkoutPhone" required>
+            </div>
+            <div class="form-group">
+                <label for="checkoutEmail">Email</label>
+                <input type="email" id="checkoutEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="checkoutAddress">Адрес доставки</label>
+                <textarea id="checkoutAddress" required></textarea>
+            </div>
+            <div class="checkout-total">
+                Итого к оплате: <span id="checkoutTotalAmount">0 ₽</span>
+            </div>
+            <button type="submit" class="checkout-submit">Оплатить заказ</button>
+        </form>
+    </div>
+
     <!-- Decorative flowers -->
     <div class="flower-decor flower-1"></div>
     <div class="flower-decor flower-2"></div>
@@ -971,7 +1323,7 @@
         <div class="container header-container">
             <a href="#" class="logo">
                 <i class="fas fa-seedling logo-icon"></i>
-                <span class="logo-text">FAMILY <span>GARDEN</span></span>
+                <span class="logo-text">РАЗНОЦВЕТЬЕ ЛИСТЬЕВ</span>
             </a>
             <div class="mobile-toggle">
                 <i class="fas fa-bars"></i>
@@ -987,6 +1339,10 @@
                     <li><a href="#gallery">Галерея</a></li>
                     <li><a href="#contact">Контакты</a></li>
                 </ul>
+                <div class="cart-icon" id="cartIcon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
             </nav>
         </div>
     </header>
@@ -998,7 +1354,6 @@
             <p>Частная садовая площадка по выращиванию, размножению и продаже многолетних цветов с гарантией качества и индивидуальным подходом</p>
             <div class="hero-btns">
                 <a href="#plants" class="btn">Выбрать растения</a>
-                <a href="#contact" class="btn btn-accent">Связаться с нами</a>
             </div>
         </div>
     </section>
@@ -1011,7 +1366,7 @@
             </div>
             <div class="about-content">
                 <div class="about-text">
-                    <h3>FAMILY GARDEN - ваш надежный партнер в мире многолетних цветов</h3>
+                    <h3>РАЗНОЦВЕТЬЕ ЛИСТЬЕВ - ваш надежный партнер в мире многолетних цветов</h3>
                     <p>Мы - частная цветочная садовая площадка, которая более 10 лет специализируемся на выращивании многолетников. Имеем коллекцию из 200+ сортов редких и популярных цветов.</p>
                     <p>Применяем экологически чистые методы выращивания и предлагаем гарантию приживаемости посадочного материала. Наша команда профессиональных садоводов обеспечивает индивидуальный подход к каждому клиенту.</p>
                     <p>Все растения выращены из проверенных материнских кустов, с соблюдением всех агротехнических требований и правил ухода.</p>
@@ -1086,52 +1441,67 @@
             
             <!-- Tabs -->
             <div class="tabs">
-                <button class="tab-btn active" data-tab="popular">Популярные</button>
-                <button class="tab-btn" data-tab="heucheras">Гейхеры</button>
+                <button class="tab-btn active" data-tab="heucheras">Гейхеры</button>
                 <button class="tab-btn" data-tab="coleus">Колеусы</button>
+                <button class="tab-btn" data-tab="perennials">Другие многолетники</button>
+                <button class="tab-btn" data-tab="houseplants">Комнатные растения</button>
             </div>
             
-            <!-- Popular Plants Tab -->
-            <div id="popular" class="tab-content active">
+            <!-- Perennials Tab -->
+            <div id="perennials" class="tab-content active">
                 <div class="plants-grid">
                     <div class="plant-card">
                         <div class="plant-image">
-                            <img src="https://images.unsplash.com/photo-1583427053005-19e305f31e7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" alt="Ирисы">
+                            <img src="DSC02682.jpg" alt="Брунера">
                         </div>
                         <div class="plant-content">
-                            <h3>Ирисы</h3>
-                            <p>Коллекция из 65 сортов: бородатые, японские, сибирские ироксы</p>
-                            <a href="#contact" class="btn">Заказать</a>
+                            <h3>Брунера "Sea Heart"</h3>
+                            <div class="plant-price">450 ₽</div>
+                            <p class="plant-description">Крупные серебристые сердцевидные листья с насыщенной зеленой сеткой прожилок</p>
+                            <div class="plant-buttons">
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn minus">-</button>
+                                    <input type="number" class="quantity-input" value="1" min="1">
+                                    <button class="quantity-btn plus">+</button>
+                                </div>
+                                <button class="add-to-cart">В корзину</button>
+                            </div>
                         </div>
                     </div>
                     <div class="plant-card">
                         <div class="plant-image">
-                            <img src="https://images.unsplash.com/photo-1613945172223-bcd832ffd894?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" alt="Астры">
+                            <img src="IMG_114531.jpg" alt="Вейгела">
                         </div>
                         <div class="plant-content">
-                            <h3>Астры</h3>
-                            <p>Разнообразные сорта: новобельгиjsкие, кустарниковые, многолистные</p>
-                            <a href="#contact" class="btn">Заказать</a>
+                            <h3>Вейгела Nana Variegata</h3>
+                            <div class="plant-price">320 ₽</div>
+                            <p class="plant-description">Зеленые листья с широкой, ярко желтовато-кремовой каймой</p>
+                            <div class="plant-buttons">
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn minus">-</button>
+                                    <input type="number" class="quantity-input" value="1" min="1">
+                                    <button class="quantity-btn plus">+</button>
+                                </div>
+                                <button class="add-to-cart">В корзину</button>
+                            </div>
                         </div>
                     </div>
                     <div class="plant-card">
                         <div class="plant-image">
-                            <img src="https://images.unsplash.com/photo-1590505610381-b81f3c4d90dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" alt="Хосты">
+                            <img src="IMG_113139.jpg" alt="Хосты">
                         </div>
                         <div class="plant-content">
                             <h3>Хосты</h3>
-                            <p>52 сорта различных цветов и форм листьев</p>
-                            <a href="#contact" class="btn">Заказать</a>
-                        </div>
-                    </div>
-                    <div class="plant-card">
-                        <div class="plant-image">
-                            <img src="https://images.unsplash.com/photo-1597384139903-b7824daf2f5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" alt="Пионы">
-                        </div>
-                        <div class="plant-content">
-                            <h3>Пионы травянистые</h3>
-                            <p>20 элитных сортов с пышным цветением</p>
-                            <a href="#contact" class="btn">Заказать</a>
+                            <div class="plant-price">650 ₽</div>
+                            <p class="plant-description">Лист зеленый с белой каймой по краю</p>
+                            <div class="plant-buttons">
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn minus">-</button>
+                                    <input type="number" class="quantity-input" value="1" min="1">
+                                    <button class="quantity-btn plus">+</button>
+                                </div>
+                                <button class="add-to-cart">В корзину</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1142,88 +1512,171 @@
                 <div class="plants-grid">
                     <div class="plant-card">
                         <div class="plant-image">
-                            <img src="https://images.unsplash.com/photo-1613945172223-bcd832ffd894?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" alt="Гейхера">
+                            <img src="DSC02693.JPG" alt="Гейхера">
                         </div>
                         <div class="plant-content">
-                            <h3>Гейхера 'Chocolate Ruffles'</h3>
+                            <h3>Гейхера "Rio"</h3>
                             <p>Отличная для бордюров и контейнеров культура</p>
                             <a href="#contact" class="btn">Заказать</a>
                         </div>
                     </div>
                     <div class="plant-card">
                         <div class="plant-image">
-                            <img src="https://images.unsplash.com/photo-1590505610381-b81f3c4d90dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" alt="Гейхера">
+                            <img src="DSC02683.JPG" alt="Гейхера">
                         </div>
                         <div class="plant-content">
-                            <h3>Гейхера 'Lime Rickey'</h3>
+                            <h3>Гейхера "Green Tea"</h3>
                             <p>С серебристо-лимонными листьями и белыми цветами</p>
                             <a href="#contact" class="btn">Заказать</a>
                         </div>
                     </div>
                     <div class="plant-card">
                         <div class="plant-image">
-                            <img src="https://images.unsplash.com/photo-1583427053005-19e305f31e7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" alt="Гейхера">
+                            <img src="DSC02689.JPG" alt="Гейхера">
                         </div>
                         <div class="plant-content">
-                            <h3>Гейхера 'Obsidian'</h3>
+                            <h3>Гейхера "Black Pearl"</h3>
                             <p>Темные листья и фиолетовые цветы</p>
                             <a href="#contact" class="btn">Заказать</a>
                         </div>
                     </div>
-                    <div class="plant-card">
-                        <div class="plant-image">
-                            <img src="https://images.unsplash.com/photo-1597825884513-690c082f943d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" alt="Гейхера">
-                        </div>
-                        <div class="plant-content">
-                            <h3>Гейхера 'Palace Purple'</h3>
-                            <p>Бордовые листья и розовые цветы</p>
-                            <a href="#contact" class="btn">Заказать</a>
-                        </div>
-                    </div>
+
                 </div>
             </div>
             
             <!-- Coleus Tab -->
             <div id="coleus" class="tab-content">
                 <div class="plants-grid">
-                    <div class="plant-card">
+                    <div class="plant-card" data-id="coleus1">
                         <div class="plant-image">
-                            <img src="https://images.unsplash.com/photo-1597825884513-690c082f943d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" alt="Колеус">
+                            <img src="DSC02649.jpg" alt="Колеус">
                         </div>
                         <div class="plant-content">
-                            <h3>Колеус 'Wizard Jade'</h3>
-                            <p>Серебристо-зеленые листья с розовыми прожилками</p>
-                            <a href="#contact" class="btn">Заказать</a>
+                            <h3>Колеус 'Avatar'</h3>
+                            <div class="plant-price">350 ₽</div>
+                            <p class="plant-description">Насыщенно-фиолетовый с зеленью, акварельные брызги</p>
+                            <div class="plant-buttons">
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn minus">-</button>
+                                    <input type="number" class="quantity-input" value="1" min="1">
+                                    <button class="quantity-btn plus">+</button>
+                                </div>
+                                <button class="add-to-cart">В корзину</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="plant-card">
+                    <div class="plant-card" data-id="coleus2">
                         <div class="plant-image">
-                            <img src="https://images.unsplash.com/photo-1590505610381-b81f3c4d90dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" alt="Колеус">
+                            <img src="IMG_190856.jpg" alt="Колеус">
                         </div>
                         <div class="plant-content">
-                            <h3>Колеус 'Black Dragon'</h3>
-                            <p>Темно-пурпурные листья</p>
-                            <a href="#contact" class="btn">Заказать</a>
+                            <h3>Колеус "Wasabi"</h3>
+                            <div class="plant-price">380 ₽</div>
+                            <p class="plant-description">Лимонно-салатовый лист</p>
+                            <div class="plant-buttons">
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn minus">-</button>
+                                    <input type="number" class="quantity-input" value="1" min="1">
+                                    <button class="quantity-btn plus">+</button>
+                                </div>
+                                <button class="add-to-cart">В корзину</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="plant-card">
+                    <div class="plant-card" data-id="coleus3">
                         <div class="plant-image">
-                            <img src="https://images.unsplash.com/photo-1613945172223-bcd832ffd894?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" alt="Колеус">
+                            <img src="IMG_190956.jpg" alt="Колеус">
                         </div>
                         <div class="plant-content">
-                            <h3>Колеус 'Kong Red'</h3>
-                            <p>Крупные красно-оранжевые листья с зубчиками</p>
-                            <a href="#contact" class="btn">Заказать</a>
+                            <h3>Колеус "King Krab"</h3>
+                            <div class="plant-price">420 ₽</div>
+                            <p class="plant-description">Крупные красно-оранжевые листья с зубчиками</p>
+                            <div class="plant-buttons">
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn minus">-</button>
+                                    <input type="number" class="quantity-input" value="1" min="1">
+                                    <button class="quantity-btn plus">+</button>
+                                </div>
+                                <button class="add-to-cart">В корзину</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="plant-card">
+                </div>
+            </div>
+
+            <!-- Houseplants Tab -->
+            <div id="houseplants" class="tab-content">
+                <div class="plants-grid">
+                    <div class="plant-card" data-id="ficus1">
                         <div class="plant-image">
-                            <img src="https://images.unsplash.com/photo-1583427053005-19e305f31e7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" alt="Колеус">
+                            <img src="https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Фикус">
                         </div>
                         <div class="plant-content">
-                            <h3>Колеус 'Electric Lime'</h3>
-                            <p>Ярко-зеленые листья с ровным окрасом</p>
-                            <a href="#contact" class="btn">Заказать</a>
+                            <h3>Фикус Бенджамина</h3>
+                            <div class="plant-price">1800 ₽</div>
+                            <p class="plant-description">Классическое комнатное растение с глянцевыми листьями. Высота 80 см.</p>
+                            <div class="plant-buttons">
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn minus">-</button>
+                                    <input type="number" class="quantity-input" value="1" min="1">
+                                    <button class="quantity-btn plus">+</button>
+                                </div>
+                                <button class="add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plant-card" data-id="monster1">
+                        <div class="plant-image">
+                            <img src="https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Монстера">
+                        </div>
+                        <div class="plant-content">
+                            <h3>Монстера Делициоза</h3>
+                            <div class="plant-price">2200 ₽</div>
+                            <p class="plant-description">Популярное растение с прорезными листьями. Идеально для больших помещений.</p>
+                            <div class="plant-buttons">
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn minus">-</button>
+                                    <input type="number" class="quantity-input" value="1" min="1">
+                                    <button class="quantity-btn plus">+</button>
+                                </div>
+                                <button class="add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plant-card" data-id="orchid1">
+                        <div class="plant-image">
+                            <img src="https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Орхидея">
+                        </div>
+                        <div class="plant-content">
+                            <h3>Орхидея Фаленопсис</h3>
+                            <div class="plant-price">1500 ₽</div>
+                            <p class="plant-description">Элегантная орхидея с белыми цветами. Цветет несколько месяцев.</p>
+                            <div class="plant-buttons">
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn minus">-</button>
+                                    <input type="number" class="quantity-input" value="1" min="1">
+                                    <button class="quantity-btn plus">+</button>
+                                </div>
+                                <button class="add-to-cart">В корзину</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plant-card" data-id="pothos1">
+                        <div class="plant-image">
+                            <img src="https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Эпипремнум">
+                        </div>
+                        <div class="plant-content">
+                            <h3>Эпипремнум золотистый</h3>
+                            <div class="plant-price">800 ₽</div>
+                            <p class="plant-description">Неприхотливая лиана с пестрыми листьями. Идеально для начинающих.</p>
+                            <div class="plant-buttons">
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn minus">-</button>
+                                    <input type="number" class="quantity-input" value="1" min="1">
+                                    <button class="quantity-btn plus">+</button>
+                                </div>
+                                <button class="add-to-cart">В корзину</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1432,7 +1885,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>FAMILY GARDEN</h3>
+                    <h3>РАЗНОЦВЕТЬЕ ЛИСТЬЕВ</h3>
                     <p>Частная садовая площадка по выращиванию, размножению и продаже многолетних цветов с гарантией качества и индивидуальным подходом.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-vk"></i></a>
@@ -1475,7 +1928,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2025 FAMILY GARDEN. Все права защищены.</p>
+                <p>&copy; 2025 РАЗНОЦВЕТЬЕ ЛИСТЬЕВ. Все права защищены.</p>
             </div>
         </div>
     </footer>
@@ -1598,6 +2051,242 @@
         
         window.addEventListener('scroll', animateOnScroll);
         window.addEventListener('load', animateOnScroll);
+
+        // Cart functionality
+        let cart = JSON.parse(localStorage.getItem('flowerShopCart')) || [];
+
+        function updateCartDisplay() {
+            const cartCount = document.getElementById('cartCount');
+            const cartTotal = document.getElementById('cartTotal');
+            const cartItems = document.getElementById('cartItems');
+
+            // Update cart count
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+
+            // Update cart total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotal.textContent = total.toLocaleString() + ' ₽';
+
+            // Update cart items display
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div class="cart-empty"><i class="fas fa-shopping-cart" style="font-size: 3rem; color: #ccc; margin-bottom: 20px;"></i><p>Ваша корзина пуста</p></div>';
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <div class="cart-item-image">
+                            <img src="${item.image}" alt="${item.name}">
+                        </div>
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-price">${item.price.toLocaleString()} ₽ × ${item.quantity} = ${(item.price * item.quantity).toLocaleString()} ₽</div>
+                        </div>
+                        <div class="cart-item-remove" onclick="removeFromCart('${item.id}')">×</div>
+                    </div>
+                `).join('');
+            }
+
+            localStorage.setItem('flowerShopCart', JSON.stringify(cart));
+        }
+
+        function addToCart(productId) {
+            const productCard = document.querySelector(`[data-id="${productId}"]`);
+            if (!productCard) return;
+
+            const name = productCard.querySelector('h3').textContent;
+            const priceText = productCard.querySelector('.plant-price').textContent;
+            const price = parseInt(priceText.replace(' ₽', '').replace(/\s/g, ''));
+            const image = productCard.querySelector('img').src;
+            const quantityInput = productCard.querySelector('.quantity-input');
+            const quantity = parseInt(quantityInput ? quantityInput.value : 1);
+
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({
+                    id: productId,
+                    name: name,
+                    price: price,
+                    image: image,
+                    quantity: quantity
+                });
+            }
+
+            updateCartDisplay();
+            showNotification(`${name} добавлен в корзину!`);
+
+            // Reset quantity to 1
+            if (quantityInput) quantityInput.value = 1;
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartDisplay();
+            showNotification('Товар удален из корзины');
+        }
+
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #4a7c59;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 5px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                z-index: 10000;
+                opacity: 0;
+                transform: translateY(-20px);
+                transition: all 0.3s ease;
+                font-family: 'Montserrat', sans-serif;
+            `;
+            notification.textContent = message;
+
+            document.body.appendChild(notification);
+
+            // Show notification
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.transform = 'translateY(0)';
+            }, 100);
+
+            // Hide notification
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateY(-20px)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Event listeners for cart
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('add-to-cart')) {
+                const productCard = e.target.closest('.plant-card');
+                if (productCard) {
+                    const productId = productCard.getAttribute('data-id');
+                    addToCart(productId);
+                }
+            }
+        });
+
+        // Quantity controls
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('plus')) {
+                const input = e.target.parentElement.querySelector('.quantity-input');
+                input.value = parseInt(input.value) + 1;
+            } else if (e.target.classList.contains('minus')) {
+                const input = e.target.parentElement.querySelector('.quantity-input');
+                const currentValue = parseInt(input.value);
+                if (currentValue > 1) {
+                    input.value = currentValue - 1;
+                }
+            }
+        });
+
+        // Cart modal
+        const cartIcon = document.getElementById('cartIcon');
+        const cartModal = document.getElementById('cartModal');
+        const cartClose = document.getElementById('cartClose');
+
+        if (cartIcon) {
+            cartIcon.addEventListener('click', () => {
+                cartModal.classList.add('open');
+            });
+        }
+
+        if (cartClose) {
+            cartClose.addEventListener('click', () => {
+                cartModal.classList.remove('open');
+            });
+        }
+
+        // Checkout modal
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const checkoutModal = document.getElementById('checkoutModal');
+        const checkoutClose = document.getElementById('checkoutClose');
+        const modalOverlay = document.getElementById('modalOverlay');
+
+        if (checkoutBtn) {
+            checkoutBtn.addEventListener('click', () => {
+                if (cart.length === 0) {
+                    showNotification('Корзина пуста!');
+                    return;
+                }
+
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const checkoutTotalAmount = document.getElementById('checkoutTotalAmount');
+                if (checkoutTotalAmount) {
+                    checkoutTotalAmount.textContent = total.toLocaleString() + ' ₽';
+                }
+
+                checkoutModal.classList.add('open');
+                modalOverlay.classList.add('open');
+                cartModal.classList.remove('open');
+            });
+        }
+
+        if (checkoutClose) {
+            checkoutClose.addEventListener('click', () => {
+                checkoutModal.classList.remove('open');
+                modalOverlay.classList.remove('open');
+            });
+        }
+
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', () => {
+                checkoutModal.classList.remove('open');
+                modalOverlay.classList.remove('open');
+            });
+        }
+
+        // Checkout form
+        const checkoutForm = document.getElementById('checkoutForm');
+        if (checkoutForm) {
+            checkoutForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Here you would integrate with Yandex.Kassa
+                // For now, we'll simulate the payment process
+
+                const formData = new FormData(checkoutForm);
+                const orderData = {
+                    customer: {
+                        name: formData.get('name'),
+                        phone: formData.get('phone'),
+                        email: formData.get('email'),
+                        address: formData.get('address')
+                    },
+                    items: cart,
+                    total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+                    orderDate: new Date().toISOString()
+                };
+
+                // Simulate payment processing
+                showNotification('Заказ оформлен! Ожидайте подтверждения оплаты.');
+
+                // Send order data to server (in real implementation)
+                console.log('Order data:', orderData);
+
+                // Clear cart and close modal
+                cart = [];
+                updateCartDisplay();
+                checkoutModal.classList.remove('open');
+                modalOverlay.classList.remove('open');
+                checkoutForm.reset();
+            });
+        }
+
+        // Initialize cart on page load
+        updateCartDisplay();
     </script>
 </body>
 </html>
