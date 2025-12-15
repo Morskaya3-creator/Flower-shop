@@ -13,9 +13,11 @@
             --secondary: #f2e8cf;
             --accent: #e6b89c;
             --accent-dark: #d38b6f;
-            --text: #333;
-            --light: #fff;
-            --gray: #f8f9fa;
+        --text: #2c3e50;
+        --text-light: #6c757d;
+        --light: #fff;
+        --gray: #f8f9fa;
+        --gray-dark: #e9ecef;
             --shadow: 0 5px 15px rgba(0,0,0,0.1);
             --transition: all 0.3s ease;
         }
@@ -80,7 +82,49 @@
         }
 
         section {
-            padding: 80px 0;
+            padding: 100px 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .plants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+        }
+
+        .plant-content {
+            padding: 25px;
+        }
+
+        .care-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .recommendation-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
         }
 
         .section-title {
@@ -853,13 +897,62 @@
             .hero h1 {
                 font-size: 2rem;
             }
-            
+
             .hero p {
                 font-size: 1rem;
             }
-            
+
             .section-title h2 {
                 font-size: 1.8rem;
+            }
+
+            body {
+                font-size: 16px;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.25rem;
+            }
+
+            .btn {
+                font-size: 1rem;
+                padding: 10px 25px;
+            }
+
+            .plant-content h3 {
+                font-size: 1.1rem;
+            }
+
+            .plant-price {
+                font-size: 1.1rem;
+            }
+
+            .plant-description {
+                font-size: 0.9rem;
+            }
+
+            .add-to-cart {
+                font-size: 0.85rem;
+                padding: 6px 12px;
+            }
+
+            .quantity-input {
+                width: 35px;
+                font-size: 0.9rem;
+            }
+
+            .quantity-btn {
+                width: 22px;
+                height: 22px;
+                font-size: 0.8rem;
             }
         }
         
@@ -1135,10 +1228,35 @@
             cursor: pointer;
             font-size: 0.9rem;
             transition: var(--transition);
+            position: relative;
         }
 
         .add-to-cart:hover {
             background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 124, 89, 0.3);
+        }
+
+        .add-to-cart.loading {
+            background: var(--primary-dark);
+            cursor: not-allowed;
+        }
+
+        .add-to-cart.loading::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            margin: auto;
+            border: 2px solid transparent;
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .quantity-controls {
@@ -1167,51 +1285,32 @@
             padding: 2px;
         }
 
-        /* Flower decorations */
+        /* Flower decorations - simplified */
         .flower-decor {
             position: absolute;
             z-index: -1;
-            opacity: 0.3;
+            opacity: 0.1;
+            pointer-events: none;
         }
-        
+
         .flower-1 {
-            top: 10%;
-            left: 5%;
-            width: 80px;
-            height: 80px;
+            top: 15%;
+            left: 3%;
+            width: 60px;
+            height: 60px;
             background: url('https://images.unsplash.com/photo-1597384139903-b7824daf2f5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80') center/cover;
             border-radius: 50%;
             transform: rotate(15deg);
         }
-        
+
         .flower-2 {
-            bottom: 15%;
-            right: 8%;
-            width: 100px;
-            height: 100px;
+            bottom: 20%;
+            right: 5%;
+            width: 70px;
+            height: 70px;
             background: url('https://images.unsplash.com/photo-1590505610381-b81f3c4d90dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80') center/cover;
             border-radius: 50%;
             transform: rotate(-10deg);
-        }
-        
-        .flower-3 {
-            top: 20%;
-            right: 12%;
-            width: 60px;
-            height: 60px;
-            background: url('https://images.unsplash.com/photo-1597825884513-690c082f943d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80') center/cover;
-            border-radius: 50%;
-            transform: rotate(25deg);
-        }
-        
-        .flower-4 {
-            bottom: 25%;
-            left: 7%;
-            width: 90px;
-            height: 90px;
-            background: url('https://images.unsplash.com/photo-1613945172223-bcd832ffd894?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80') center/cover;
-            border-radius: 50%;
-            transform: rotate(-20deg);
         }
         
         .features::before,
@@ -1516,32 +1615,56 @@
                 <div class="plants-grid">
                     <div class="plant-card" data-id="heuchera1">
                         <div class="plant-image">
-                            <img src="DSC02693.JPG" alt="Гейхера">
+                            <img src="DSC02693.JPG" alt="Гейхера Rio">
                         </div>
                         <div class="plant-content">
                             <h3>Гейхера "Rio"</h3>
-                            <p>Отличная для бордюров и контейнеров культура</p>
-                            <a href="#contact" class="btn">Заказать</a>
+                            <div class="plant-price">280 ₽</div>
+                            <p class="plant-description">Отличная для бордюров и контейнеров культура</p>
+                            <div class="plant-buttons">
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn minus">-</button>
+                                    <input type="number" class="quantity-input" value="1" min="1">
+                                    <button class="quantity-btn plus">+</button>
+                                </div>
+                                <button class="add-to-cart">В корзину</button>
+                            </div>
                         </div>
                     </div>
                     <div class="plant-card" data-id="heuchera2">
                         <div class="plant-image">
-                            <img src="DSC02683.JPG" alt="Гейхера">
+                            <img src="DSC02683.JPG" alt="Гейхера Green Tea">
                         </div>
                         <div class="plant-content">
                             <h3>Гейхера "Green Tea"</h3>
-                            <p>С серебристо-лимонными листьями и белыми цветами</p>
-                            <a href="#contact" class="btn">Заказать</a>
+                            <div class="plant-price">320 ₽</div>
+                            <p class="plant-description">С серебристо-лимонными листьями и белыми цветами</p>
+                            <div class="plant-buttons">
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn minus">-</button>
+                                    <input type="number" class="quantity-input" value="1" min="1">
+                                    <button class="quantity-btn plus">+</button>
+                                </div>
+                                <button class="add-to-cart">В корзину</button>
+                            </div>
                         </div>
                     </div>
                     <div class="plant-card" data-id="heuchera3">
                         <div class="plant-image">
-                            <img src="DSC02689.JPG" alt="Гейхера">
+                            <img src="DSC02689.JPG" alt="Гейхера Black Pearl">
                         </div>
                         <div class="plant-content">
                             <h3>Гейхера "Black Pearl"</h3>
-                            <p>Темные листья и фиолетовые цветы</p>
-                            <a href="#contact" class="btn">Заказать</a>
+                            <div class="plant-price">350 ₽</div>
+                            <p class="plant-description">Темные листья и фиолетовые цветы</p>
+                            <div class="plant-buttons">
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn minus">-</button>
+                                    <input type="number" class="quantity-input" value="1" min="1">
+                                    <button class="quantity-btn plus">+</button>
+                                </div>
+                                <button class="add-to-cart">В корзину</button>
+                            </div>
                         </div>
                     </div>
 
@@ -2076,6 +2199,7 @@
             const productCard = document.querySelector(`[data-id="${productId}"]`);
             if (!productCard) return;
 
+            const addToCartBtn = productCard.querySelector('.add-to-cart');
             const name = productCard.querySelector('h3').textContent;
             const priceText = productCard.querySelector('.plant-price').textContent;
             const price = parseInt(priceText.replace(' ₽', '').replace(/\s/g, ''));
@@ -2083,25 +2207,40 @@
             const quantityInput = productCard.querySelector('.quantity-input');
             const quantity = parseInt(quantityInput ? quantityInput.value : 1);
 
-            const existingItem = cart.find(item => item.id === productId);
-
-            if (existingItem) {
-                existingItem.quantity += quantity;
-            } else {
-                cart.push({
-                    id: productId,
-                    name: name,
-                    price: price,
-                    image: image,
-                    quantity: quantity
-                });
+            // Show loading state
+            if (addToCartBtn) {
+                addToCartBtn.classList.add('loading');
+                addToCartBtn.disabled = true;
             }
 
-            updateCartDisplay();
-            showNotification(`${name} добавлен в корзину!`);
+            // Simulate processing time
+            setTimeout(() => {
+                const existingItem = cart.find(item => item.id === productId);
 
-            // Reset quantity to 1
-            if (quantityInput) quantityInput.value = 1;
+                if (existingItem) {
+                    existingItem.quantity += quantity;
+                } else {
+                    cart.push({
+                        id: productId,
+                        name: name,
+                        price: price,
+                        image: image,
+                        quantity: quantity
+                    });
+                }
+
+                updateCartDisplay();
+                showNotification(`${name} добавлен в корзину!`);
+
+                // Reset quantity to 1
+                if (quantityInput) quantityInput.value = 1;
+
+                // Remove loading state
+                if (addToCartBtn) {
+                    addToCartBtn.classList.remove('loading');
+                    addToCartBtn.disabled = false;
+                }
+            }, 800);
         }
 
         function removeFromCart(productId) {
